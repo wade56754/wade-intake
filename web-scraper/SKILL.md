@@ -10,7 +10,7 @@ tags: [web, scraper, fetcher, wechat, feishu, cdp, jina, scrapling]
 
 # Web Scraper — 统一网页抓取 Skill
 
-> 这是 [learning-assistant](../SKILL.md) 依赖的通用抓取引擎，从个人 KB 工具脱敏后
+> 这是 [intake](../SKILL.md) 依赖的通用抓取引擎，从个人 KB 工具脱敏后
 > 独立发布在同一仓库的 `web-scraper/` 子目录下。硬编码的个人机器路径和已退役内部
 > 系统（OpenClaw）引用已移除。
 
@@ -35,7 +35,7 @@ python3 scripts/fetch.py "<URL>" --cookie-file ~/cookies.txt
 python3 scripts/fetch.py "<URL>" --platform feishu
 ```
 
-在 `learning-assistant` 里接入：设置 `LEARNING_ASSISTANT_WEB_SCRAPER_DIR=/path/to/web-scraper/scripts`。
+在 `intake` 里接入：设置 `LEARNING_ASSISTANT_WEB_SCRAPER_DIR=/path/to/web-scraper/scripts`。
 
 ## 路由策略
 

@@ -70,8 +70,8 @@ def append_log_entry(platform, author, title, url, score, filepath, action='inge
         f'- 源：{_trim_url(url)}\n'
         f'- 评分：{score_str}\n'
         f'- 文件：`{filepath_display}`\n'
-        f'- touched: wade-learning-assistant only（workspace-wiki Raw 层未同步）\n'
-        f'- 写入者：`wade-learning-assistant/main.py` → `wiki_writeback.append_log_entry`\n'
+        f'- touched: intake only（外部知识库 Raw 层未同步）\n'
+        f'- 写入者：`intake/main.py` → `wiki_writeback.append_log_entry`\n'
     )
 
     try:

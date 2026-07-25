@@ -2,7 +2,7 @@
 
 ## When this applies
 
-Use this when the Wade learning assistant successfully fetches a URL (especially Zhihu via TikHub) but the analysis stage logs a fallback such as:
+Use this when intake successfully fetches a URL (especially Zhihu via TikHub) but the analysis stage logs a fallback such as:
 
 ```text
 [llm] 分析失败，回退 heuristic: Expecting value: line 1 column 1 (char 0)
@@ -21,7 +21,7 @@ In the observed case, Zhihu fetch worked via TikHub and the failure was in the L
 
 ## Reproduction pattern
 
-From the learning-assistant app directory, directly call `_llm_analyze(...)` with a short synthetic payload before rerunning the full URL pipeline. This isolates analysis from fetch/storage.
+From the intake app directory, directly call `_llm_analyze(...)` with a short synthetic payload before rerunning the full URL pipeline. This isolates analysis from fetch/storage.
 
 Expected failure symptom in the broken path:
 

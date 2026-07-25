@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Feishu document fetcher for Wade learning assistant.
+Feishu document fetcher for intake.
 
 Uses lark-cli as the first-party fetch path (replaces the retired OC
 web-scraper feishu adapter, 2026-07-24):

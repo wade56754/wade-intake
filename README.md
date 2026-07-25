@@ -1,4 +1,4 @@
-# learning-assistant
+# intake
 
 一个个人学习助手：喂给它任意平台的链接（微信公众号 / 小红书 / 抖音 / TikTok /
 YouTube / X(Twitter) / 飞书 / 知乎 / 普通网页 / GitHub），它会自动识别平台、
@@ -16,8 +16,8 @@ Claude Code 也能直接用。
 ## 快速开始
 
 ```bash
-git clone <this-repo>
-cd learning-assistant
+git clone https://github.com/wade56754/wade-intake.git
+cd wade-intake
 export TIKHUB_API_KEY=your_key_here   # 大多数平台的主抓取路径都依赖它
 python3 scripts/main.py "https://x.com/someuser/status/123456789"
 ```

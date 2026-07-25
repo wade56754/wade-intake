@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-GitHub repo fetcher for Wade learning assistant.
+GitHub repo fetcher for intake.
 
 Uses the GitHub CLI as the local first-party fetch path. The CLI handles auth
 and public-repo access; this module never reads or prints tokens.
