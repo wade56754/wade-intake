@@ -1,0 +1,20 @@
+# runtime data (generated on first run)
+knowledge/
+arsenal/
+logs/
+memory/
+runs/
+credentials/
+youtube-transcript/
+
+# secrets
+.env
+*.key
+
+# python
+__pycache__/
+*.pyc
+.venv/
+
+# os
+.DS_Store
