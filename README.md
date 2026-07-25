@@ -39,17 +39,23 @@ python3 scripts/main.py "https://x.com/someuser/status/123456789"
 - 一个 OpenAI-compatible LLM 后端 — 结构化内容分析（未配置时自动回退到
   `scripts/scorer.py` 的关键词启发式评分）
 - ffmpeg + Whisper（`mlx_whisper` 或 `whisper`）— X 视频本地转写
-- 一个独立的 YouTube 字幕抓取工具、通用网页抓取工具、X 评论区/时间线抓取工具 —
-  见下方 `BAOYU_YOUTUBE_TRANSCRIPT_DIR` / `LEARNING_ASSISTANT_WEB_SCRAPER_DIR` / `XTF_DIR`
+- 一个独立的 YouTube 字幕抓取工具、X 评论区/时间线抓取工具 —
+  见下方 `BAOYU_YOUTUBE_TRANSCRIPT_DIR` / `XTF_DIR`
+
+通用网页/微信公众号/飞书/GitHub/YouTube/得到课程的兜底抓取引擎（`web-scraper/`）
+**已随本仓库一起提供**，`scripts/main.py` 默认会自动找到它，无需额外配置；它自己
+的可选依赖（`FEISHU_APP_ID`、Scrapling、Chrome CDP 等）见 `web-scraper/SKILL.md`。
 
 完整环境变量表见 `SKILL.md` § 环境变量。
 
 ## 目录结构
 
 ```
-scripts/           抓取器 + 路由 + 分析 + 评分 + 存储（这是唯一的真本代码）
-references/        排障笔记：TikHub 知乎路径、得到课程页 DOM 兜底、LLM JSON 解析踩坑
-SKILL.md           Claude Code Skill 定义（平台矩阵、评分体系、输出格式）
+scripts/           学习助手主体：抓取器 + 路由 + 分析 + 评分 + 存储
+web-scraper/        通用网页抓取引擎（微信/飞书/GitHub/YouTube/得到/通用网页），
+                    独立可用，也是 scripts/main.py 的默认兜底抓取层
+references/         排障笔记：TikHub 知乎路径、得到课程页 DOM 兜底、LLM JSON 解析踩坑
+SKILL.md            Claude Code Skill 定义（平台矩阵、评分体系、输出格式）
 ```
 
 运行后会额外生成（均不提交）：

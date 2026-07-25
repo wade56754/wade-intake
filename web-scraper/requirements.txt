@@ -1,0 +1,10 @@
+# web-scraper Python 依赖
+# 核心依赖（标准库无需列出）
+
+# Scrapling 适配器（可选，在专用 venv 中）
+# source ~/.venvs/scrapling/bin/activate
+scrapling>=0.2.9
+html2text>=2024.2.26
+
+# Cookie 注入模式（付费内容）
+playwright>=1.40.0

@@ -37,7 +37,7 @@ python3 scripts/main.py "{URL}" 2>&1
 
 | 平台 | 链接特征 | 抓取方式 | 状态 |
 |------|---------|---------|------|
-| 微信公众号 | `mp.weixin.qq.com/s/` | TikHub / urllib（可选：自备 web-scraper，见环境变量） | ✅ |
+| 微信公众号 | `mp.weixin.qq.com/s/` | TikHub / urllib，兜底走内置 web-scraper | ✅ |
 | 小红书 | `xiaohongshu.com` / `xhslink.com` | TikHub xiaohongshu API | ✅ |
 | 抖音 | `douyin.com` / `v.douyin.com` | **douyin-mcp（优先，需 mcporter）**，回退可选抖音 CLI / TikHub | ✅ |
 | TikTok | `tiktok.com` | TikHub tiktok API | ✅ |
@@ -47,8 +47,8 @@ python3 scripts/main.py "{URL}" 2>&1
 | GitHub 仓库 | `github.com/{owner}/{repo}` | **gh CLI** | ✅ |
 | 知乎回答/问题/专栏 | `zhihu.com/question/...` / `zhuanlan.zhihu.com/p/...` | **TikHub Zhihu API 主路径**：回答/问题走 `fetch_question_answers`，专栏走 `fetch_column_article_detail`；不要优先走通用 web-scraper | ✅ |
 | 飞书文档 | `feishu.cn` / `lark.com` | **lark-cli**（wiki 节点 `get_node` 解析 + `docs +fetch` 正文，均 bot 身份） | ✅ |
-| FlowUs 付费页 | `flowus.cn` | 可选 web-scraper（Cookie 注入） | ✅ |
-| 通用网页 | 其他 | 可选 web-scraper（三级降级：Jina→Scrapling→urllib） | ✅ |
+| FlowUs 付费页 | `flowus.cn` | 内置 web-scraper（Cookie 注入） | ✅ |
+| 通用网页 | 其他 | 内置 web-scraper（三级降级：Jina→Scrapling→urllib） | ✅ |
 | 得到课程 | `dedao.cn/course/detail` | **浏览器可见 DOM 优先**：打开课程页 → 点击「课程内容」→ 抽取课程元数据与目录；web-scraper 仅作初筛 | ⚠️ |
 
 ---
@@ -93,11 +93,12 @@ gh repo view owner/repo
 gh search repos "query" --sort stars --limit 10
 ```
 
-### 6. 通用网页 — 可选外部 web-scraper
+### 6. 通用网页 — 内置 web-scraper
 ```bash
-# 设置 LEARNING_ASSISTANT_WEB_SCRAPER_DIR 指向一个实现了
-# `fetch.route(url, platform=None) -> Result(content, ...)` 接口的抓取器目录；
-# 未设置时通用网页/微信公众号以外的兜底路径会直接报错，不静默失败。
+# 本仓库自带 web-scraper/（见 ../web-scraper/SKILL.md），main.py 默认自动加载它，
+# 用于通用网页/微信公众号/飞书/GitHub/YouTube/得到课程的兜底抓取（Jina→Scrapling→urllib
+# 三级降级 + Chrome CDP 登录态支持）。要换成自己的实现，设置 LEARNING_ASSISTANT_WEB_SCRAPER_DIR
+# 指向一个实现了 `fetch.route(url, platform=None) -> Result(content, ...)` 接口的目录。
 ```
 
 ### 6.1 知乎 — TikHub 专用路径
@@ -271,7 +272,7 @@ gh search repos "query" --sort stars --limit 10
 | `XTF_DIR` | 否 | 可选 x-tweet-fetcher companion 工具目录（评论区/时间线降级用） |
 | `BAOYU_YOUTUBE_TRANSCRIPT_DIR` | 否 | 可选 baoyu-youtube-transcript companion 工具目录 |
 | `DOUYIN_CLI_PATH` | 否 | 可选独立抖音 CLI 抓取器路径 |
-| `LEARNING_ASSISTANT_WEB_SCRAPER_DIR` | 否 | 可选通用网页抓取器目录（需实现 `fetch.route(url, platform=None)` 接口） |
+| `LEARNING_ASSISTANT_WEB_SCRAPER_DIR` | 否 | 通用网页抓取器目录；默认自动指向本仓库内的 `web-scraper/scripts`，设置后可换成自己的实现（需实现 `fetch.route(url, platform=None)` 接口） |
 | `LEARNING_ASSISTANT_WIKI_LOG_PATH` | 否 | 可选：把 ingest 事件回填到一个外部知识库的 log.md |
 | `NITTER_URL` | 否 | 本地 Nitter 实例地址，默认 `http://127.0.0.1:8788` |
 | `WADE_LEARNING_X_VIDEO_TRANSCRIBE` | 否 | 设为 `1` 时对 X 视频做本地 Whisper 转写（需要 ffmpeg + mlx_whisper/whisper） |

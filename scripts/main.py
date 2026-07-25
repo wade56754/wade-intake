@@ -31,8 +31,10 @@ from storage import store_article, _should_store
 from wiki_writeback import append_log_entry
 import failure_logger
 
-# ── web-scraper 统一抓取层（可选外部依赖，本仓库不含实现，需自备并设置路径） ──
-WEB_SCRAPER_DIR = os.environ.get('LEARNING_ASSISTANT_WEB_SCRAPER_DIR', '')
+# ── web-scraper 统一抓取层（默认指向本仓库同级的 web-scraper/scripts，可用
+#    LEARNING_ASSISTANT_WEB_SCRAPER_DIR 覆盖为自己的实现） ──
+_DEFAULT_WEB_SCRAPER_DIR = os.path.join(os.path.dirname(SCRIPT_DIR), 'web-scraper', 'scripts')
+WEB_SCRAPER_DIR = os.environ.get('LEARNING_ASSISTANT_WEB_SCRAPER_DIR', _DEFAULT_WEB_SCRAPER_DIR)
 _web_scraper_route = None
 if WEB_SCRAPER_DIR and os.path.isdir(WEB_SCRAPER_DIR):
     sys.path.insert(0, WEB_SCRAPER_DIR)

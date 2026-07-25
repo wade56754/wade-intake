@@ -39,8 +39,8 @@ z.fetch_question_answers(question_id="648199294", limit=3, order="default")
 返回中包含回答：
 
 ```text
-answer_id: 2002682066572178479
-author: 王富贵儿
+answer_id: {answer_id}
+author: {某作者昵称}
 content: 完整 HTML 正文
 comment_count: 663
 ```
